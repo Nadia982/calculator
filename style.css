@@ -1,6 +1,4 @@
-*{
-    border: 1px solid red;
-}
+
 body{
     margin: 0;padding: 0;box-sizing: border-box;
     display: flex;
@@ -11,8 +9,8 @@ body{
 
 .container{
     min-height: 90vh;
-    width: 80%;
-    max-width: 500px;
+    width: 90%;
+    max-width: 400px;
     background-color: black;
     color: white;
     border-radius: 12px;
