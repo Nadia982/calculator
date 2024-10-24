@@ -1,4 +1,6 @@
-
+*{
+    border: 1px solid red;
+}
 body{
     margin: 0;padding: 0;box-sizing: border-box;
     display: flex;
@@ -29,18 +31,20 @@ section{
     font-weight: 300;
 }
 
-#calculation{
-    font-size: 24px;
-    color: lightgrey;
-    
-}
-
 #display{
     margin-right: 10px;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
     gap: 15px;
+}
+#calculation{
+    font-size: 24px;
+    min-height: 2rem;
+}
+
+#result{
+    min-height: 3rem;
 }
 
 .btn{
