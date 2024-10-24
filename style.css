@@ -67,11 +67,13 @@ background-color: #8890a5;
 }
 
 .blue{
-    background-color: #4b5efc;
-}
+    background-color: #2c368f;
+    }
+
 
 .blue:hover{
     background-color: #798bf9;
+    background-color: #4b5efc;
     }
 .dark{
     background-color: #2e2f48;
@@ -81,4 +83,13 @@ background-color: #8890a5;
     background-color: #505266;
     }
 
+.times{
+    padding-top: 12px;
+}
 
+#roman, #words{
+    flex-basis: calc(50% - 10px);
+    height: 72px;
+    font-size: 18px;
+    padding: 6px;
+}
