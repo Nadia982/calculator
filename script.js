@@ -29,7 +29,7 @@ function calculate() {
   }
 }
 
-
+function numberToWords(){
 const ones = {
     0: "zero",
     1: "one",
@@ -74,15 +74,24 @@ const suffixes = {
     5: "trillion",
 }
 
-function numberToWords(){
-    calculate();
-    const number = result.innerText;
+    // Obtaining input to convert number to words
+    calculate(); //calculate the answer for the result box in case it hasn't already been calculated.
+    const numText = "";
+    const num = result.innerText;
+    const finalNumText = convertNum(num);
+    const limit = 1000000000000;
+    result.innerText = finalNumText;
 
-    const limit = 1000000000000
 
-    const numberInWords = "";
+    function convertNum(num) {
+        let numStr = num.toString().split(".");
+        let wholeNum = numStr[0];
+        let decimalNum = numStr[1];
+        let convertedWholeNum = "";
 
-    
+}
+
+}
 
 //     if (number in underTwenty){
 //         result.innerText = underTwenty[number];
@@ -92,5 +101,4 @@ function numberToWords(){
 //     if(arrayOfDigits.length ==2 && number > 19 ){
 // result.innerText = `${tensColumn[arrayOfDigits[0]]} ${underTwenty[arrayOfDigits[1]]}`
 //     }
-}
 
