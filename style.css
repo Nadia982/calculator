@@ -1,6 +1,6 @@
-*{
+/* *{
     border: 1px solid red;
-}
+} */
 body{
     margin: 0;padding: 0;box-sizing: border-box;
     display: flex;
@@ -10,9 +10,10 @@ body{
 }
 
 .container{
+    margin-top: 2rem;
     min-height: 90vh;
     width: 90%;
-    max-width: 400px;
+    max-width: 450px;
     background-color: black;
     color: white;
     border-radius: 12px;
@@ -27,8 +28,7 @@ section{
     flex-wrap: wrap;
     flex: 1;
     padding: 10px;
-    font-size: 40px;
-    font-weight: 300;
+        font-weight: 300;
 }
 
 #display{
@@ -41,10 +41,13 @@ section{
 #calculation{
     font-size: 24px;
     min-height: 2rem;
+    padding: 0 1rem;
 }
 
 #result{
-    min-height: 3rem;
+    font-size: 28px;
+    padding: 0 1rem;
+    min-height: 4rem;
 }
 
 .btn{
