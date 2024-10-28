@@ -2,13 +2,13 @@ const calculation = document.getElementById("calculation");
 const result = document.getElementById("result");
 
 function appendToDisplay(input) {
-  if(calculation.innerText.length<25){
+ let maxInputLength = 25
+  if(calculation.innerText.length<maxInputLength){
   calculation.innerText += input;
   }else {
     result.style.fontSize = "32px";
-    result.innerText = "Error: this calculator supports an input of up to 25 digits";
+    result.innerText = `Error: this calculator supports an input of up to ${maxInputLength} digits`;
   }
-   
 }
 
 function clearDisplay() {
