@@ -92,8 +92,6 @@ function numberToRomanNumerals() {
 
 function numberToWords() {
   calculate(); //calculate the answer for the result box in case it hasn't already been calculated.
-  let number = result.innerText;
-   
     const zeroToNine = {
     0: "zero",
     1: "one",
@@ -106,7 +104,6 @@ function numberToWords() {
     8: "eight",
     9: "nine",
   };
-
   const tenToNineteen = {
     10: "ten",
     11: "eleven",
@@ -119,7 +116,6 @@ function numberToWords() {
     18: "eighteen",
     19: "nineteen",
   };
-
   const tensColumn = {
     2: "twenty",
     3: "thirty",
@@ -130,7 +126,6 @@ function numberToWords() {
     8: "eighty",
     9: "ninety",
   };
-
   const suffixes = {
     1: "",
     2: "thousand",
@@ -144,8 +139,8 @@ function numberToWords() {
   const num = result.innerText;
   const finalNumText = convertNum(num);
   const numLimit = 1000000000000;
+  let numText;
   
-
   function convertNum(num) {
     const absNum = Math.abs(num);
 
@@ -156,17 +151,18 @@ function numberToWords() {
       }
     }
     catch(err){
-      // alert(err)
-      // console.log("Error: max value to convert to words is 1,000,000,000")
       result.style.fontSize = "32px";
       result.innerText = "Error: max value to convert to words is 1,000,000,000";
       return;
     }
 
-    // let numStr = num.toString().split(".");
-    // let wholeNum = numStr[0];
-    // let decimalNum = numStr[1];
-    // let convertedWholeNum = "";
+    if(num.toString().includes("-") && absNum !== 0){
+      numText+= "negative "; 
+    }
+    
+    return numText;
   }
-  // result.innerText = finalNumText;
+  result.style.fontSize = "62px";
+  result.innerText = finalNumText;
+  
 }
