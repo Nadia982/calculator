@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html lang="en-gb">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Calculator</title>
-    
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-<section id="display">
-    <div id="calculation"></div>
-    <div id="result"></div>
-</section>
-<section id="buttons">
-    <button onclick="appendToDisplay('+')" class="btn blue">+</button>
-    <button onclick="appendToDisplay('-')" class="btn blue">-</button>
-    <button onclick="appendToDisplay('*')" class="btn blue times">*</button>
-    <button onclick="appendToDisplay('/')" class="btn blue">/</button>
-    <button onclick="appendToDisplay('7')" class="btn dark">7</button>
-    <button onclick="appendToDisplay('8')" class="btn dark">8</button>
-    <button onclick="appendToDisplay('9')" class="btn dark">9</button>
-    
+      <section id="display">
+        <div id="calculation"></div>
+        <div id="result"></div>
+      </section>
+      <section id="buttons">
+        <button id="ac" onclick="clearDisplay()" class="btn light">AC</button>
+        <button id="backspace" onclick="backspace()" class="btn light">
+          <span id="backspace-text">&#9003;</span>
+        </button>
+        <button id="percent" onclick="percent()" class="btn light">%</button>
+        <button id="divide" onclick="appendToDisplay('/')" class="btn blue">
+          ÷
+        </button>
 
-    <button onclick="appendToDisplay('4')" class="btn dark">4</button>
-    <button onclick="appendToDisplay('5')" class="btn dark">5</button>
-    <button onclick="appendToDisplay('6')" class="btn dark">6</button>
-    <button id="ac" onclick="clearDisplay()" class="btn light">AC</button>
-    
-    
-    <button onclick="appendToDisplay('1')" class="btn dark">1</button>
-    <button onclick="appendToDisplay('2')" class="btn dark">2</button>
-    <button onclick="appendToDisplay('3')" class="btn dark">3</button>
-    <button id="equals" onclick="calculate()" class="btn light">=</button>
-    
-    
-    <button onclick="appendToDisplay('.')" class="btn dark">.</button>
-    <button onclick="appendToDisplay('0')" class="btn dark">0</button>
-    <button onclick="backspace()" class="btn dark">&#9003;</button>
-    
-    
-    
-    <button id="roman" class="btn blue" onclick="numberToRomanNumerals()">Convert to Roman numerals</button>
-    <button id="words" class="btn blue" onclick="convertNumberToWords()">Convert numbers to words</button>
+        <button onclick="appendToDisplay('7')" class="btn dark">7</button>
+        <button onclick="appendToDisplay('8')" class="btn dark">8</button>
+        <button onclick="appendToDisplay('9')" class="btn dark">9</button>
+        <button
+          id="multiply"
+          onclick="appendToDisplay('*')"
+          class="btn blue times"
+        >
+          *
+        </button>
 
-</section>
-</div>
+        <button onclick="appendToDisplay('4')" class="btn dark">4</button>
+        <button onclick="appendToDisplay('5')" class="btn dark">5</button>
+        <button onclick="appendToDisplay('6')" class="btn dark">6</button>
 
-<script src="script.js">
-        
-</script>
-</body>
+        <button id="minus" onclick="appendToDisplay('-')" class="btn blue">
+          -
+        </button>
+
+        <button onclick="appendToDisplay('1')" class="btn dark">1</button>
+        <button onclick="appendToDisplay('2')" class="btn dark">2</button>
+        <button onclick="appendToDisplay('3')" class="btn dark">3</button>
+        <button id="plus" onclick="appendToDisplay('+')" class="btn blue">
+          +
+        </button>
+
+        <button id="zero" onclick="appendToDisplay('0')" class="btn dark">
+          0
+        </button>
+        <button onclick="appendToDisplay('.')" class="btn dark">.</button>
+        <button id="equals" onclick="calculate()" class="btn blue">=</button>
+
+        <div class="roman-words-container">
+          <button id="roman" class="btn blue" onclick="numberToRomanNumerals()">
+            Convert to Roman numerals
+          </button>
+          <button id="words" class="btn blue" onclick="convertNumberToWords()">
+            Convert numbers to words
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
