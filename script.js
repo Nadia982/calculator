@@ -1,6 +1,9 @@
 console.clear();
 const calculation = document.getElementById("calculation");
 const result = document.getElementById("result");
+result.innerText = "0";
+result.style.fontSize = "56px";
+
 
 function appendToDisplay(input) {
   let maxInputLength = 30;
@@ -14,7 +17,7 @@ function appendToDisplay(input) {
 
 function clearDisplay() {
   calculation.innerText = "";
-  result.innerText = "";
+  result.innerText = "0";
 }
 
 function backspace() {
@@ -23,8 +26,9 @@ function backspace() {
 }
 
 function calculate() {
-  result.style.fontSize = "56px";
-  try {
+  if(calculation.innerText.length === 0){
+    result.innerText = 0;
+  } else {try {
     let answer = eval(calculation.innerText);
     if (answer < 100000000) {
       result.innerText = parseFloat(answer.toFixed(6));
@@ -36,7 +40,7 @@ function calculate() {
   } catch (error) {
     result.innerText = "Error";
   }
-}
+}}
 
 function numberToRomanNumerals() {
   calculate(); //calculate the answer for the result box in case it hasn't already been calculated.
