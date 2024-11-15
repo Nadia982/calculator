@@ -24,26 +24,114 @@ function backspace() {
   calculation.innerText = calculation.innerText.slice(0, -1);
   result.innerText = calculation.innerText;
 }
+function processOperation(values, operators) {
+  let right = values.pop();
+  let left = values.pop();
+  let operator = operators.pop();
+
+  if (operator === "+") values.push(left + right);
+  if (operator === "-") values.push(left - right);
+  if (operator === "*") values.push(left * right);
+  if (operator === "/") values.push(left / right);
+}
+
+function evaluateExpression(expression) {
+  let values = [];
+  let operators = [];
+  let i = 0;
+
+  while (i < expression.length) {
+    let char = expression[i];
+
+    if (isDigit(char) || char === '.') {
+      let number = 0;
+      let decimalPlace = 1;
+      let hasDecimal = false;
+
+      // Parse the entire number, including any decimals
+      while (i < expression.length && (isDigit(expression[i]) || expression[i] === '.')) {
+        if (expression[i] === '.') {
+          hasDecimal = true;
+        } else {
+          if (hasDecimal) {
+            decimalPlace /= 10;
+            number += (expression[i] - '0') * decimalPlace;
+          } else {
+            number = number * 10 + (expression[i] - '0');
+          }
+        }
+        i++;
+      }
+      values.push(number);
+      i--;
+    } else if (char === '+' || char === '-' || char === '*' || char === '/') {
+      if (char === '-' && i + 1 < expression.length && expression[i + 1] === '-') {
+        i++; 
+        char = '+';
+      }
+
+      while (operators.length && precedence(operators[operators.length - 1]) >= precedence(char)) {
+        processOperation(values, operators);
+      }
+      operators.push(char);
+    }
+    i++;
+  }
+
+  while (operators.length) {
+    processOperation(values, operators);
+  }
+
+  return values.pop();
+}
+
+function isDigit(char) {
+  return char >= '0' && char <= '9';
+}
+
+function precedence(op) {
+  if (op === "+" || op === "-") return 1;
+  if (op === "*" || op === "/") return 2;
+  return 0;
+}
 
 function calculate() {
+  result.style.fontSize = "56px";
   if(calculation.innerText.length === 0){
-    result.innerText = 0;
-  } else {try {
-    let answer = eval(calculation.innerText);
+        result.innerText = 0;
+      } else {
+  try {
+    let answer = evaluateExpression(calculation.innerText);
     if (answer < 100000000) {
       result.innerText = parseFloat(answer.toFixed(6));
     } else {
       result.style.fontSize = "28px";
-      result.innerText =
-        "This calculator only shows results up to 14 digits long";
+      result.innerText = "This calculator only shows results up to 14 digits long";
     }
   } catch (error) {
     result.innerText = "Error";
   }
 }}
 
+// function calculate() {
+//   if(calculation.innerText.length === 0){
+//     result.innerText = 0;
+//   } else {try {
+//     let answer = eval(calculation.innerText);
+//     if (answer < 100000000) {
+//       result.innerText = parseFloat(answer.toFixed(6));
+//     } else {
+//       result.style.fontSize = "28px";
+//       result.innerText =
+//         "This calculator only shows results up to 14 digits long";
+//     }
+//   } catch (error) {
+//     result.innerText = "Error";
+//   }
+// }}
+
 function numberToRomanNumerals() {
-  calculate(); //calculate the answer for the result box in case it hasn't already been calculated.
+  calculate();
   let num = result.innerText;
   if (num > 3999999) {
     result.style.fontSize = "32px";
