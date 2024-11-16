@@ -1,5 +1,6 @@
 console.clear();
-const calculation = document.getElementById("calculation");
+// Query selectors 
+const display = document.getElementById("display");
 const result = document.getElementById("result");
 result.innerText = "0";
 result.style.fontSize = "56px";
@@ -7,8 +8,8 @@ result.style.fontSize = "56px";
 
 function appendToDisplay(input) {
   let maxInputLength = 30;
-  if (calculation.innerText.length < maxInputLength) {
-    calculation.innerText += input;
+  if (display.innerText.length < maxInputLength) {
+    display.innerText += input;
   } else {
     result.style.fontSize = "32px";
     result.innerText = `Error: this calculator supports an input of up to ${maxInputLength} digits`;
@@ -16,14 +17,15 @@ function appendToDisplay(input) {
 }
 
 function clearDisplay() {
-  calculation.innerText = "";
+  display.innerText = "";
   result.innerText = "0";
 }
 
 function backspace() {
-  calculation.innerText = calculation.innerText.slice(0, -1);
-  result.innerText = calculation.innerText;
+  display.innerText = display.innerText.slice(0, -1);
+  result.innerText = display.innerText;
 }
+// processOperation
 function processOperation(values, operators) {
   let right = values.pop();
   let left = values.pop();
@@ -34,7 +36,7 @@ function processOperation(values, operators) {
   if (operator === "*") values.push(left * right);
   if (operator === "/") values.push(left / right);
 }
-
+// evaluate expression
 function evaluateExpression(expression) {
   let values = [];
   let operators = [];
@@ -97,38 +99,21 @@ function precedence(op) {
 
 function calculate() {
   result.style.fontSize = "56px";
-  if(calculation.innerText.length === 0){
+  if(display.innerText.length === 0){
         result.innerText = 0;
       } else {
   try {
-    let answer = evaluateExpression(calculation.innerText);
-    if (answer < 100000000) {
+    let answer = evaluateExpression(display.innerText);
+    if (answer < 1000000000) {
       result.innerText = parseFloat(answer.toFixed(6));
     } else {
       result.style.fontSize = "28px";
-      result.innerText = "This calculator only shows results up to 14 digits long";
+      result.innerText = "This calculator only shows results up to 10 digits long";
     }
   } catch (error) {
     result.innerText = "Error";
   }
 }}
-
-// function calculate() {
-//   if(calculation.innerText.length === 0){
-//     result.innerText = 0;
-//   } else {try {
-//     let answer = eval(calculation.innerText);
-//     if (answer < 100000000) {
-//       result.innerText = parseFloat(answer.toFixed(6));
-//     } else {
-//       result.style.fontSize = "28px";
-//       result.innerText =
-//         "This calculator only shows results up to 14 digits long";
-//     }
-//   } catch (error) {
-//     result.innerText = "Error";
-//   }
-// }}
 
 function numberToRomanNumerals() {
   calculate();

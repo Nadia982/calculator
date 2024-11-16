@@ -25,7 +25,7 @@ body {
   padding: 0 6px 6px;
 }
 
-#display {
+#display-container {
   display: flex;
   flex-wrap: wrap;
   flex: 1;
@@ -35,7 +35,7 @@ body {
   align-items: flex-end;
 
 }
-#calculation {
+#display {
   font-size: 2rem;
   min-height: 3rem;
   padding: 0 1rem;
