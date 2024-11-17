@@ -6,7 +6,7 @@ result.innerText = "0";
 result.style.fontSize = "56px";
 
 function appendToDisplay(input) {
-  let maxInputLength = 20;
+  let maxInputLength = 30;
   if (display.innerText.length < maxInputLength) {
     display.innerText += input;
   } else {
@@ -16,6 +16,7 @@ function appendToDisplay(input) {
 }
 
 function clearDisplay() {
+  result.style.fontSize = "56px";
   display.innerText = "";
   result.innerText = "0";
 }
@@ -24,27 +25,27 @@ function backspace() {
   display.innerText = display.innerText.slice(0, -1);
   result.innerText = display.innerText;
 }
-
 function processOperation(values, operators) {
-  let right = values.pop();
-  let left = values.pop();
+  let operand2 = values.pop();
+  let operand1 = values.pop();
   let operator = operators.pop();
 
-  if (operator === "+") values.push(left + right);
-  if (operator === "-") values.push(left - right);
-  if (operator === "*") values.push(left * right);
-  if (operator === "/") values.push(left / right);
-console.log("processOperation. values: ",values, " operators: ",operators)
+  if (operator === "+") {
+    values.push(operand1 + operand2);
+  } else if (operator === "-") {
+    values.push(operand1 - operand2);
+  } else if (operator === "*") {
+    values.push(operand1 * operand2);
+  } else {
+    values.push(operand1 / operand2);
+  }
 }
 
 function evaluateExpression(expression) {
+  let operatorError = false;
   let values = [];
   let operators = [];
   let i = 0;
-
-  if (expression[0] === "-") {
-    expression = "0" + expression;
-  }
 
   while (i < expression.length) {
     let char = expression[i];
@@ -78,39 +79,39 @@ function evaluateExpression(expression) {
       ) {
         i++;
         char = "+";
-      }
+      } 
+      // else if (
+      //   i + 1 < expression.length &&
+      //   isOperator(expression[i + 1])
+      // ) {
+      //   console.log("Error - cannot calculate two consecutive operators")
+      //   operatorError = true;
+      // }
 
       while (
-        operators.length && precedence(operators[operators.length - 1]) >= precedence(char)
+        operators.length &&
+        precedence(operators[operators.length - 1]) >= precedence(char) && operatorError == false
       ) {
-        console.log("operators: ",operators);
-        console.log("precedence(operators[operators.length - 1]) is ",precedence(operators[operators.length - 1]))
-        console.log("operators[operators.length - 1]) is ",operators[operators.length - 1])
-        console.log("precedence(char) ",precedence(char))
-        console.log("char ",char)
-
-        console.log("********************************")
         processOperation(values, operators);
       }
       operators.push(char);
-      // console.log("operators: ",operators)
     }
     i++;
   }
 
   while (operators.length) {
-    console.log("evaluationExpression. values: ",values, " operators: ", operators)
     processOperation(values, operators);
   }
-
-  return values.pop();
+return values.pop();
+  // return operatorError ? "Error - cannot calculate two consecutive operators" : values.pop();
 }
 
 function isDigitOrDecimalPoint(char) {
   return char.match(/[0-9.]/);
 }
+
 function isOperator(char) {
-  return char.match(/[+*\-/]/);
+  return char.match(/[+\-/]/);
 }
 
 function precedence(op) {
@@ -123,21 +124,25 @@ function calculate() {
   result.style.fontSize = "56px";
   if (display.innerText.length === 0) {
     result.innerText = 0;
+  } else if (
+    display.innerText.length > 0 &&
+    (display.innerText[display.innerText.length - 1] === "+" ||
+      display.innerText[display.innerText.length - 1] === "-" ||
+      display.innerText[display.innerText.length - 1] === "*" ||
+      display.innerText[display.innerText.length - 1] === "/")
+  ) {
+    result.style.fontSize = "28px";
+    result.innerText =
+      "Error - ensure your calculation doesn't end with +, -, * or /";
   } else {
     try {
       let answer = evaluateExpression(display.innerText);
-      if (answer < 1000000000 && !isNaN(answer)) {
+      if (answer < 1000000000) {
         result.innerText = parseFloat(answer.toFixed(6));
-      } else if (answer > 1000000000) {
+      } else {
         result.style.fontSize = "28px";
         result.innerText =
           "This calculator only shows results up to 10 digits long";
-      } else if (isNaN(answer)) {
-        result.style.fontSize = "28px";
-        result.innerText = "Answer is not a number - please try again";
-      } else {
-        result.style.fontSize = "28px";
-        result.innerText = "Unknown error - please try again";
       }
     } catch (error) {
       result.innerText = "Error";
